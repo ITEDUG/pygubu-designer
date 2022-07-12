@@ -1,4 +1,3 @@
-
 __version__ = "0.27"
 
 
@@ -34,6 +33,3 @@ def get_requirements():
 
 def get_setup_requirements():
     return [r[0] + r[1] for r in get_requirements()]
-
-
-    

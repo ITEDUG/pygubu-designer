@@ -14,11 +14,23 @@ install_req(){
     'wheel>=0.37.0' 'twine>=4.0.0'  'pip>=22.1.1'
 }
 
+blk(){
+    black -l 80 --exclude="venv/" [[ $# -eq 0 ]] && echo '.' || echo $@
+}
+
 sort_imports(){
     isort -v ./setup.py
     isort -v ./pygubudesigner/
-    autopep8 -i -a -a -r -v ./setup.py
-    autopep8 -i -a -a -r -v ./pygubudesigner/
+    blk ./setup.py
+    blk ./pygubudesigner/
+
+    if [[ -d ../pygubu ]] # 
+    then
+        isort -v ../pygubu/setup.py
+        isort -v ../pygubu/pygubudesigner/
+        blk ../pygubu/setup.py
+        blk ../pygubu/pygubu/
+    fi
 }
 
 sort_imports_commit(){
